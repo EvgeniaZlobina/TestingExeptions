@@ -5,6 +5,7 @@ public class ShopRepository {
 
     /**
      * Вспомогательный метод для имитации добавления элемента в массив
+     *
      * @param current — массив, в который мы хотим добавить элемент
      * @param product — элемент, который мы хотим добавить
      * @return — возвращает новый массив, который выглядит, как тот, что мы передали,
@@ -12,15 +13,14 @@ public class ShopRepository {
      */
     private Product[] addToArray(Product[] current, Product product) {
         Product[] tmp = new Product[current.length + 1];
-        for (int i = 0; i < current.length; i++) {
-            tmp[i] = current[i];
-        }
+        System.arraycopy(current, 0, tmp, 0, current.length);
         tmp[tmp.length - 1] = product;
         return tmp;
     }
 
     /**
      * Метод добавления товара в репозиторий
+     *
      * @param product — добавляемый товар
      */
     public void add(Product product) {
@@ -31,8 +31,12 @@ public class ShopRepository {
         return products;
     }
 
-    // Этот способ мы рассматривали в теории в теме про композицию
     public void remove(int id) {
+        Product productremoveById = finById(id);
+        if (productremoveById == null) {
+            throw new NotfoundException(id);
+        }
+
         Product[] tmp = new Product[products.length - 1];
         int copyToIndex = 0;
         for (Product product : products) {
@@ -43,11 +47,14 @@ public class ShopRepository {
         }
         products = tmp;
     }
-   // public Product finById (int id) {
-     //   for (int i = 0; i < products.length; i++) {
-       //     if (id = products.) {return product;
-         //   }
-           // return null;
-        //}
-    //}
+
+    public Product finById(int id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
+    }
+
 }

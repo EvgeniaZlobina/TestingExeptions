@@ -39,7 +39,8 @@ public class Product {
         this.title = title;
     }
 
-    public int getPrice() { return price;
+    public int getPrice() {
+        return price;
     }
 
     public void setPrice(int price) {

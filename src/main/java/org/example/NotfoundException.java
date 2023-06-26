@@ -1,7 +1,7 @@
 package org.example;
 
-public class NotfoundException {
-    public NotfoundException (String s) {
-        //super(s);
+public class NotfoundException extends RuntimeException {
+    public NotfoundException(int id) {
+        super("Element with id " + id + " not found");
     }
 }
